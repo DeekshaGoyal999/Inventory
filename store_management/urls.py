@@ -1,12 +1,15 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
+#Creating router object
+router=DefaultRouter()
 
+# Register ItemsViewSet with router
+router.register('stores',viewset=views.ItemsViewSet, basename='Items')
+
+#The API URLs are now determined automatically by the router.
 urlpatterns = [
-    path('add_item', views.InsertItemsView.as_view(),name='create item' ),
-    # path('show_item', views.ShowItemsView.as_view(),name='show all item' ),
-    path('show_item/<int:pk>', views.ShowItemsView.as_view(),name='show item' ),
-    path('hard_delete_item/<int:pk>', views.DeleteItemsView.as_view(),name='delete item' ),
-    path('soft_delete_item/<int:pk>', views.SoftDeleteItemsView.as_view(),name='soft delete item' ),
-    path('update_item/<int:pk>', views.UpdateItemsView.as_view(),name='update item' ),
+    path('', include(router.urls)),
+
 ]

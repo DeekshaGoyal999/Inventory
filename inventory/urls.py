@@ -21,6 +21,7 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/store_management/', include('store_management.urls')),
+    # path('api/store_management/', include('store_management.urls')),
+    path('', include('store_management.urls')),
 
 ]
